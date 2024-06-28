@@ -35,7 +35,7 @@ export class LoginComponent {
         this._route2.navigate(["/admin/perfil"]);
       },
       (error: any) => {
-        console.log(error)
+        console.log("ERROR"+ error)
       }
     )
   }

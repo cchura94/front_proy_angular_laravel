@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   getPerfil(){
-    return this.http.get(this.baseUrl+"/v1/auth/profile", {headers: {Authorization: 'Bearer '+localStorage.getItem("access_token")}})
+    return this.http.get(this.baseUrl+"/v1/auth/profile", )
   }
 
 
