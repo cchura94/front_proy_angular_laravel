@@ -1,1 +1,44 @@
-<p>usuario works!</p>
+<h1>Gestión Usuarios</h1>
+{{ usuarios |json }}
+
+
+<form [formGroup]="usuarioForm">
+
+    <label for="n">Ingrese Nombre:</label>
+    <input type="text" id="n" formControlName="name">
+    <br>
+    <label for="c">Ingrese Correo:</label>
+    <input type="email" id="c" formControlName="email">
+    <br>
+    <label for="con">Ingrese Contraseña:</label>
+    <input type="password" id="con" formControlName="password">
+    <br>
+    <button (click)="funGuardar()">Guardar Usuario</button>
+    
+
+</form>
+
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>ACCION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (user of usuarios; track $index) {
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <button (click)="funEditarUsuario(user)">Editar</button>
+                    <button (click)="funEliminar(user.id)">X</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

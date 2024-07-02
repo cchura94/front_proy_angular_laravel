@@ -32,5 +32,21 @@ export class PerfilComponent implements OnInit {
 
   }
 
+  funSalir(){
+
+    this.authService.funSalir().subscribe(
+      (res: any) => {
+        console.log(res);
+        localStorage.removeItem("access_token");
+        this.router.navigate(["/login"]);
+        
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
+
+  }
+
 
 }
