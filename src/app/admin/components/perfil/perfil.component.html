@@ -1,5 +1,11 @@
-<h1>Mi Perfil</h1>
+<div class="card">
+    <h1>Mi Perfil</h1>
+    <h4>NOMBRE: {{ perfil?.name }}</h4>
+    <h4>CORREO: {{ perfil?.email }}</h4>
+    <h4>FECHA CREACIÓN: {{ perfil?.created_at }}</h4>
+    
+    <code><pre>{{ perfil | json }}</pre></code>
+    
+    <button (click)="funSalir()">SALIR</button>
 
-<code><pre>{{ perfil | json }}</pre></code>
-
-<button (click)="funSalir()">SALIR</button>
+</div>

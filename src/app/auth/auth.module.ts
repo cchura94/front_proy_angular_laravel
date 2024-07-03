@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PasswordModule } from 'primeng/password';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -14,6 +18,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+
+    PasswordModule,
+    CheckboxModule,
+    RouterModule,
+    ButtonModule
   ]
 })
 export class AuthModule { }

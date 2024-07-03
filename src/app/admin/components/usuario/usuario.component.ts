@@ -20,6 +20,9 @@ export class UsuarioComponent implements OnInit{
 
   usuarioForm: FormGroup;
 
+  
+  visibleDIalogUser: boolean = false
+
   constructor( fb: FormBuilder, private _route: Router ){
 
     this.usuarioForm = fb.group({
@@ -53,6 +56,8 @@ export class UsuarioComponent implements OnInit{
           this.usuarioForm.reset();
           this.editUserId = -1;
 
+          this.visibleDIalogUser = false
+
           Swal.fire({
             title: 'Usuario Actualizado!',
             text: 'Para continuar precione ok',
@@ -76,6 +81,8 @@ export class UsuarioComponent implements OnInit{
         (res) => {
           this.funListar();
           this.usuarioForm.reset();
+
+          this.visibleDIalogUser = false
 
           Swal.fire({
             title: 'Usuario Registrado!',
@@ -114,6 +121,10 @@ export class UsuarioComponent implements OnInit{
 
     }
     
+  }
+
+  nuevoUsuarioDialog(){
+    this.visibleDIalogUser = true
   }
 
 }

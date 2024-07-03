@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { LayoutService } from '../../layout/service/app.layout.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
   prueba: any
 
 
-  constructor( fb: FormBuilder, private _route: Router ){
+  constructor( fb: FormBuilder, private _route: Router, public layoutService: LayoutService ){
 
     this.loginForm = fb.group({
       email: fb.control('', [Validators.email, Validators.required]),

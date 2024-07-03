@@ -1,8 +1,64 @@
-<h1>Gestión Usuarios</h1>
+<div class="card">
+
+    <h1>Gestión Usuarios</h1>
+<!--
 {{ usuarios |json }}
+-->
+
+<p-button (click)="nuevoUsuarioDialog()" label="Nuevo Usuario" />
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visibleDIalogUser" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">Datos Usuario.</span>
+    <div [formGroup]="usuarioForm">
+        <div class="flex align-items-center gap-3 mb-3">
+            <label for="Nombre" class="font-semibold w-6rem">Nombre</label>
+            <input pInputText id="Nombre" class="flex-auto" autocomplete="off" formControlName="name" />
+        </div>
+        <div class="flex align-items-center gap-3 mb-5">
+            <label for="email" class="font-semibold w-6rem">Correo</label>
+            <input pInputText id="email" class="flex-auto" autocomplete="off" formControlName="email" />
+        </div>
+
+        <div class="flex align-items-center gap-3 mb-5">
+            <label for="pass" class="font-semibold w-6rem">Correo</label>
+            <input type="password" id="pass" class="flex-auto" autocomplete="off" formControlName="password" />
+        </div>
+        <div class="flex justify-content-end gap-2">
+            <p-button label="Cancelar" severity="secondary" (click)="visibleDIalogUser = false" />
+            <p-button label="Registrar" (click)="funGuardar()" />
+        </div>
+
+    </div>
+</p-dialog>
 
 
-<form [formGroup]="usuarioForm">
+
+<p-table [value]="usuarios" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>ACCION</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuario>
+        <tr>
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.name }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>
+
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+</div>
+
+
+
+<form [formGroup]="usuarioForm" >
 
     <label for="n">Ingrese Nombre:</label>
     <input type="text" id="n" formControlName="name">
@@ -17,7 +73,6 @@
     
 
 </form>
-
 
 <table border="1">
     <thead>
