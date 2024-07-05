@@ -21,11 +21,11 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'UI Components',
+                label: 'Gestión de Usuarios',
                 items: [
                     { label: 'Perfil', icon: 'pi pi-fw pi-id-card', routerLink: ['/admin/perfil'] },
                     { label: 'Usuarios', icon: 'pi pi-fw pi-user', routerLink: ['/admin/usuario'] },
-                    { label: 'Persona', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate'] },
+                    { label: 'Persona', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/admin/persona'] },
                     
                 ]
             },

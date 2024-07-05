@@ -1,0 +1,35 @@
+<div class="card">
+    <h2>Persona</h2>
+
+    <p-table [value]="personas" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>nombres</th>
+                <th>Apellidos</th>
+                <th>CUENTA USUARIO</th>
+                <th>DOCUMENTOS</th>
+                <th>Accion</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-persona>
+            <tr>
+                <td>{{ persona.id }}</td>
+                <td>{{ persona.nombres }}</td>
+                <td>{{ persona.apellidos }}</td>
+                <td>
+                    @if (persona.user) {
+                        <h5>NOMBRE: {{ persona.user?.name }}</h5>
+                        <h5>CORREO: {{ persona.user?.email }}</h5>
+                    }
+                    
+
+                </td>
+                <td>
+                    {{ persona.documentos}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

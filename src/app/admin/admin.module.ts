@@ -10,18 +10,22 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { PersonaComponent } from './components/persona/persona.component';
+import { PrimeModule } from '../prime/prime.module';
 
 
 @NgModule({
   declarations: [
     PerfilComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    PersonaComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     AppLayoutModule,
+    PrimeModule,
 
     TableModule,
     ButtonModule,
