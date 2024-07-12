@@ -12,13 +12,17 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { PersonaComponent } from './components/persona/persona.component';
 import { PrimeModule } from '../prime/prime.module';
+import { ProductoComponent } from './components/producto/producto.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
 
 
 @NgModule({
   declarations: [
     PerfilComponent,
     UsuarioComponent,
-    PersonaComponent
+    PersonaComponent,
+    ProductoComponent,
+    CategoriaComponent
   ],
   imports: [
     CommonModule,

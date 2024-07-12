@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
 
 
 
@@ -8,8 +10,10 @@ import { TableModule } from 'primeng/table';
   declarations: [],
   imports: [
     CommonModule,
-    TableModule
+    TableModule,
+    ToastModule,
+    ToolbarModule
   ],
-  exports: [TableModule]
+  exports: [ToastModule, ToolbarModule]
 })
 export class PrimeModule { }

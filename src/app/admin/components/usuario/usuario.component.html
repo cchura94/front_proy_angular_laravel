@@ -38,6 +38,7 @@
             <th>ID</th>
             <th>NOMBRE</th>
             <th>CORREO</th>
+            <th>Datos Personales</th>
             <th>ACCION</th>
         </tr>
     </ng-template>
@@ -46,6 +47,7 @@
             <td>{{ usuario.id }}</td>
             <td>{{ usuario.name }}</td>
             <td>{{ usuario.email }}</td>
+            <td>{{ usuario.persona?.nombres }} <br /> {{ usuario.persona?.apellidos }}  </td>
             <td>
 
             </td>
