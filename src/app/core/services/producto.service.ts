@@ -31,4 +31,8 @@ export class ProductoService {
   eliminar(id: number){
     return this.http.delete(`${this.urlBase}/producto/${id}`);
   }
+
+  actualizarImagen(id:number, formData: any){
+    return this.http.post(`${this.urlBase}/producto/${id}/actualizar-imagen`, formData);
+  }
 }

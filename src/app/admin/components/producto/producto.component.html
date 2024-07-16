@@ -4,7 +4,7 @@
 <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
         <div class="my-2">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"></button>
+            <button pButton pRipple label="Nuevo Producto" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNuevoProducto()"></button>
         </div>
     </ng-template>
 
@@ -17,13 +17,16 @@
     </ng-template>
 </p-toolbar>
 
-<p-table #dt [value]="products" [columns]="cols" responsiveLayout="scroll" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {first} to {last} de {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="id">
+<p-table #dt [value]="products" [columns]="cols" responsiveLayout="scroll" [rows]="10" [paginator]="true"
+    [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} to {last} de {totalRecords} entries" selectionMode="multiple"
+    [rowHover]="true" dataKey="id">
     <ng-template pTemplate="caption">
         <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 class="m-0">Gestión Productos</h5>
             <span class="block mt-2 md:mt-0 p-input-icon-left">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" placeholder="Buscar..."  class="w-full sm:w-auto"/>
+                <input pInputText type="text" placeholder="Buscar..." class="w-full sm:w-auto" />
             </span>
         </div>
     </ng-template>
@@ -47,7 +50,8 @@
                 {{product.nombre}}
             </td>
             <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-                <img [src]="'http://localhost:8000/' + product.imagen" [alt]="product.name" width="100" class="shadow-4" />
+                <img [src]="'http://localhost:8000/' + product.imagen" [alt]="product.name" width="100"
+                    class="shadow-4" />
             </td>
             <td style="width:14%; min-width:8rem;">
                 <span class="p-column-title">Precio</span>
@@ -59,10 +63,87 @@
             </td>
             <td>
                 <div class="flex">
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-image" class="p-button-info mr-2"
+                        (click)="openDialogImagen(product)"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                        (click)="editProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteProduct(product)"></button>
                 </div>
             </td>
         </tr>
     </ng-template>
 </p-table>
+
+<p-dialog header="Subir Imagen" [modal]="true" [(visible)]="visibleDialogImagen" [style]="{ width: '30rem' }">
+    <span class="p-text-secondary block mb-5">Seleccionar una imagen antes de subir.</span>
+    <div class="flex align-items-center gap-3 mb-3">
+        <p-fileUpload name="demo[]" [customUpload]="true" (uploadHandler)="subirImagen($event)" [multiple]="false"
+            accept="image/*" maxFileSize="1000000">
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">
+                        {{ file.name }} - {{ file.size }} bytes
+                    </li>
+                </ul>
+            </ng-template>
+        </p-fileUpload>
+    </div>
+</p-dialog>
+
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Producto" [modal]="true"
+    class="p-fluid">
+    <ng-template pTemplate="content">
+        <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.imagen" width="150"
+            class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="product.image">
+
+        <div [formGroup]="formProducto">
+
+
+
+            <div class="field">
+                <label for="name">Nombre</label>
+                <input type="text" pInputText id="name" formControlName="nombre" required autofocus
+                    [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" />
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.nombre">El nombre se erequerido.</small>
+            </div>
+            <div class="field">
+                <label for="description">Descripción</label>
+                <textarea id="description" pInputTextarea formControlName="descripcion" required rows="3"
+                    cols="20"></textarea>
+            </div>
+
+            <div class="field">
+                <label class="mb-3">Category</label>
+                <div class="formgrid grid">
+                    <div class="field-radiobutton col-6">
+                        <p-radioButton id="category1" name="category" value="Accessories"
+                            formControlName="product.category"></p-radioButton>
+                        <label for="category1">Accessories</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col">
+                    <label for="price">Precio</label>
+                    <p-inputNumber id="price" formControlName="precio" mode="currency" currency="USD"
+                        locale="en-US"></p-inputNumber>
+                </div>
+                <div class="field col">
+                    <label for="quantity">Cantidad</label>
+                    <p-inputNumber id="quantity" formControlName="stock"></p-inputNumber>
+                </div>
+            </div>
+
+        </div>
+
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardarProducto()"></button>
+    </ng-template>
+
+</p-dialog>
