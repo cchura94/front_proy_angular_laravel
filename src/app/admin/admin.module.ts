@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppLayoutModule } from '../layout/app.layout.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -28,6 +28,7 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     AppLayoutModule,
     PrimeModule,
 

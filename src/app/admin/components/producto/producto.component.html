@@ -17,17 +17,21 @@
     </ng-template>
 </p-toolbar>
 
-<p-table #dt [value]="products" [columns]="cols" responsiveLayout="scroll" [rows]="10" [paginator]="true"
-    [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+<p-table #dt [value]="products" [lazy]="true" (onLazyLoad)="loadProductos($event)" [loading]="loading" [totalRecords]="totalRecords" [columns]="cols" responsiveLayout="scroll" [rows]="5" [paginator]="true"
+    [rowsPerPageOptions]="[5,10,20,30]" [showCurrentPageReport]="true"
     currentPageReportTemplate="Mostrando {first} to {last} de {totalRecords} entries" selectionMode="multiple"
     [rowHover]="true" dataKey="id">
     <ng-template pTemplate="caption">
         <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 class="m-0">Gestión Productos</h5>
-            <span class="block mt-2 md:mt-0 p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" placeholder="Buscar..." class="w-full sm:w-auto" />
-            </span>
+            <form (ngSubmit)="buscar()" #form="ngForm">
+                <span class="block mt-2 md:mt-0 p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" name="q" [(ngModel)]="q" placeholder="Buscar..." class="w-full sm:w-auto" />
+                    <Button type="submit">Buscar</Button>
+                </span>
+
+            </form>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -99,13 +103,12 @@
 
         <div [formGroup]="formProducto">
 
-
-
             <div class="field">
                 <label for="name">Nombre</label>
                 <input type="text" pInputText id="name" formControlName="nombre" required autofocus
                     [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" />
-                <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.nombre">El nombre se erequerido.</small>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.nombre">El nombre se requerido.</small>
+                <small class="ng-dirty ng-invalid">{{ errors.nombre }}</small>
             </div>
             <div class="field">
                 <label for="description">Descripción</label>
@@ -114,14 +117,17 @@
             </div>
 
             <div class="field">
-                <label class="mb-3">Category</label>
+                <label class="mb-3">Categoria</label>
                 <div class="formgrid grid">
-                    <div class="field-radiobutton col-6">
-                        <p-radioButton id="category1" name="category" value="Accessories"
-                            formControlName="product.category"></p-radioButton>
-                        <label for="category1">Accessories</label>
-                    </div>
+                    @for (item of categorias; track $index) {
+                        <div class="field-radiobutton col-6">
+                            <p-radioButton name="categoria_id" [value]="item.id"
+                                formControlName="categoria_id"></p-radioButton>
+                            <label>{{ item.nombre }}</label>
+                        </div>
+                    }
                 </div>
+                <small class="ng-dirty ng-invalid">{{ errors.categoria_id }}</small>
             </div>
 
             <div class="formgrid grid">
@@ -129,10 +135,12 @@
                     <label for="price">Precio</label>
                     <p-inputNumber id="price" formControlName="precio" mode="currency" currency="USD"
                         locale="en-US"></p-inputNumber>
+                        <small class="ng-dirty ng-invalid">{{ errors.precio }}</small>
                 </div>
                 <div class="field col">
                     <label for="quantity">Cantidad</label>
                     <p-inputNumber id="quantity" formControlName="stock"></p-inputNumber>
+                    <small class="ng-dirty ng-invalid">{{ errors.stock }}</small>
                 </div>
             </div>
 

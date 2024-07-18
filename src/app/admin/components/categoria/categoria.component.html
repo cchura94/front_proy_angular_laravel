@@ -1,1 +1,18 @@
-<p>categoria works!</p>
+<div class="card">
+    <p-table [value]="categorias" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Acción</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-categoria>
+            <tr>
+                <td>{{categoria.id}}</td>
+                <td>{{categoria.nombre}}</td>
+                <td>{{categoria.detalle}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

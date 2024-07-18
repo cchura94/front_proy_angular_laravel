@@ -12,8 +12,8 @@ export class ProductoService {
 
   constructor() { }
 
-  listar(page: number = 1){
-    return this.http.get(`${this.urlBase}/producto?page=${page}`);
+  listar(page: number = 1, limit: number = 5, q: string=""){
+    return this.http.get(`${this.urlBase}/producto?page=${page}&limit=${limit}&q=${q}`);
   }
 
   guardar(data: any){
