@@ -1,0 +1,89 @@
+<div class="grid">
+    <div class="col-7">
+        <div class="card">
+            <div class="text-center p-1 border-round-sm bg-primary font-bold ">Productos</div>
+
+            <app-pedido-producto [carrito]="carrito"></app-pedido-producto>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="grid">
+            <div class="col-12">
+                <div class="card">
+                    <div class="text-center p-1 border-round-sm bg-primary font-bold ">Carrito</div>
+                    <p-table [value]="carrito">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>NOMBRE</th>
+                                <th>CANT.</th>
+                                <th>PRECIO</th>
+                                <th>ACCION</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product>
+                            <tr>
+                                <td>{{ product.nombre }}</td>
+                                <td>{{ product.cantidad }}</td>
+                                <td>{{ product.precio }}</td>
+                                <td>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger mr-2"
+                                        (click)="quitarCarrito(product)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="text-center p-1 border-round-sm bg-primary font-bold ">Cliente</div>
+                    <form (ngSubmit)="buscarCliente()" #form="ngForm">
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" name="q" [(ngModel)]="q" placeholder="Buscar..."
+                                class="w-full sm:w-auto" />
+
+                        </span>
+
+                    </form>
+                    <p-button (onClick)="visible_cliente = true" label="Nuevo Cliente" />
+
+
+                    {{ cliente_seleccionado|json }}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="text-center p-1 border-round-sm bg-primary font-bold ">Pedido</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Nuevo Cliente" [modal]="true" [(visible)]="visible_cliente" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">Información de Nuevo Cliente.</span>
+    <div class="flex align-items-center gap-3 mb-3">
+        <label for="username" class="font-semibold w-6rem">Nombre Completo</label>
+        <input pInputText id="username" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+        <label for="email" class="font-semibold w-6rem">CI/NIT</label>
+        <input pInputText id="email" class="flex-auto" autocomplete="off" />
+    </div>
+
+    <div class="flex align-items-center gap-3 mb-5">
+        <label for="email" class="font-semibold w-6rem">TELEFONO</label>
+        <input pInputText id="email" class="flex-auto" autocomplete="off" />
+    </div>
+
+    <div class="flex align-items-center gap-3 mb-5">
+        <label for="email" class="font-semibold w-6rem">DIRECCION</label>
+        <input pInputText id="email" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancel" severity="secondary" (onClick)="visible_cliente = false" />
+        <p-button label="Save" (onClick)="visible_cliente = false" />
+    </div>
+</p-dialog>

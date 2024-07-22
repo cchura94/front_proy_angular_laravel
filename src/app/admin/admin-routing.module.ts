@@ -6,6 +6,8 @@ import { AppLayoutComponent } from '../layout/app.layout.component';
 import { PersonaComponent } from './components/persona/persona.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
+import { ListaPedidoComponent } from './components/pedido/lista-pedido/lista-pedido.component';
+import { NuevoPedidoComponent } from './components/pedido/nuevo-pedido/nuevo-pedido.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,14 @@ const routes: Routes = [
       {
         path: 'categoria',
         component: CategoriaComponent,
+      },
+      {
+        path: 'pedido',
+        component: ListaPedidoComponent,
+      },
+      {
+        path: 'pedido/nuevo',
+        component: NuevoPedidoComponent,
       }
     ]
 

@@ -14,6 +14,9 @@ import { PersonaComponent } from './components/persona/persona.component';
 import { PrimeModule } from '../prime/prime.module';
 import { ProductoComponent } from './components/producto/producto.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
+import { NuevoPedidoComponent } from './components/pedido/nuevo-pedido/nuevo-pedido.component';
+import { ListaPedidoComponent } from './components/pedido/lista-pedido/lista-pedido.component';
+import { PedidoProductoComponent } from './components/pedido/pedido-producto/pedido-producto.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
     UsuarioComponent,
     PersonaComponent,
     ProductoComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    NuevoPedidoComponent,
+    ListaPedidoComponent,
+    PedidoProductoComponent
   ],
   imports: [
     CommonModule,
