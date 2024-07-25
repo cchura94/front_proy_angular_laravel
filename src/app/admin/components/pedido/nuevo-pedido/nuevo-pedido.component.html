@@ -48,13 +48,25 @@
                     </form>
                     <p-button (onClick)="visible_cliente = true" label="Nuevo Cliente" />
 
+                    @if (cliente_seleccionado.id) {
+                        <div>
+                            <h4>CLIENTE: {{ cliente_seleccionado.nombre_completo }}</h4>
+                            <h4>CI/NIT: {{ cliente_seleccionado.ci }}</h4>
 
-                    {{ cliente_seleccionado|json }}
+                            <h4>DIRECCION: {{ cliente_seleccionado.direccion }}</h4>
+
+                            <h4>TELEFONO: {{ cliente_seleccionado.telefono }}</h4>
+
+    
+                        </div>
+                    }
+
                 </div>
             </div>
             <div class="col-12">
                 <div class="card">
                     <div class="text-center p-1 border-round-sm bg-primary font-bold ">Pedido</div>
+                    <p-button (onClick)="guardarPedido()" label="Guardar Pedido" />
 
                 </div>
             </div>
@@ -64,26 +76,30 @@
 
 <p-dialog header="Nuevo Cliente" [modal]="true" [(visible)]="visible_cliente" [style]="{ width: '25rem' }">
     <span class="p-text-secondary block mb-5">Información de Nuevo Cliente.</span>
-    <div class="flex align-items-center gap-3 mb-3">
-        <label for="username" class="font-semibold w-6rem">Nombre Completo</label>
-        <input pInputText id="username" class="flex-auto" autocomplete="off" />
-    </div>
-    <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">CI/NIT</label>
-        <input pInputText id="email" class="flex-auto" autocomplete="off" />
+    <div [formGroup]="formCliente">
+
+        <div class="flex align-items-center gap-3 mb-3">
+            <label for="username" class="font-semibold w-6rem">Nombre Completo</label>
+            <input pInputText id="username" class="flex-auto" autocomplete="off" formControlName="nombre_completo" />
+        </div>
+        <div class="flex align-items-center gap-3 mb-5">
+            <label for="email" class="font-semibold w-6rem">CI/NIT</label>
+            <input pInputText id="email" class="flex-auto" autocomplete="off" formControlName="ci" />
+        </div>
+    
+        <div class="flex align-items-center gap-3 mb-5">
+            <label for="email" class="font-semibold w-6rem">TELEFONO</label>
+            <input pInputText id="email" class="flex-auto" autocomplete="off" formControlName="telefono" />
+        </div>
+    
+        <div class="flex align-items-center gap-3 mb-5">
+            <label for="email" class="font-semibold w-6rem">DIRECCION</label>
+            <input pInputText id="email" class="flex-auto" autocomplete="off" formControlName="direccion" />
+        </div>
     </div>
 
-    <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">TELEFONO</label>
-        <input pInputText id="email" class="flex-auto" autocomplete="off" />
-    </div>
-
-    <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">DIRECCION</label>
-        <input pInputText id="email" class="flex-auto" autocomplete="off" />
-    </div>
     <div class="flex justify-content-end gap-2">
-        <p-button label="Cancel" severity="secondary" (onClick)="visible_cliente = false" />
-        <p-button label="Save" (onClick)="visible_cliente = false" />
+        <p-button label="Cancelar" severity="secondary" (onClick)="visible_cliente = false" />
+        <p-button label="Guardar Cliente" (onClick)="guardarCliente()" [disabled]="!formCliente.valid" />
     </div>
 </p-dialog>
