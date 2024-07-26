@@ -12,6 +12,10 @@ export class PedidoService {
 
   constructor() { }
 
+  descargarPDF(){
+    return this.http.get(`${this.urlBase}/pedido/generar-pedido-pdf`, {responseType: 'blob'});
+  }
+
   listar(page: number = 1, limit: number = 5, q: string=""){
     return this.http.get(`${this.urlBase}/pedido?page=${page}&limit=${limit}&q=${q}`);
   }
