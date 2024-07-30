@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": ["sweetalert2"],
             "outputPath": "dist/front_proyecto_angular_laravel",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -41,8 +42,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",

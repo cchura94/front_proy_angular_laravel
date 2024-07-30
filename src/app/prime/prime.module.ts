@@ -7,6 +7,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber'
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DividerModule } from 'primeng/divider';
+
 
 const modulos = [
   TableModule,
@@ -15,7 +17,8 @@ const modulos = [
   FileUploadModule,
   RadioButtonModule,
   InputNumberModule,
-  InputTextareaModule
+  InputTextareaModule,
+  DividerModule
 ]
 
 
